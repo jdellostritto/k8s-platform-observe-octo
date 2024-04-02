@@ -13,7 +13,7 @@ spec:
   project: root-project-observability
   source:
     path: app/observe/app-bundle
-    repoURL: https://github.com/jdellostritto/k8s-platform-musical-waffle
+    repoURL: https://github.com/jdellostritto/k8s-platform-observe-octo
     targetRevision: HEAD
   syncPolicy:
     syncOptions:
