@@ -1,34 +1,34 @@
 ---
 - op: replace
   path: /spec/template/spec/containers/0/name
-  value: base-tempo
+  value: base-prometheus
 - op: add
   path: /spec/template/spec/containers/0/ports
   value:
-    - name: grpc # OTLP gRPC receiver
-      containerPort: 4317
-    - name: grafana # Prometheus exporter metrics
-      containerPort: 3200
+    - name: http 
+      containerPort: 9090
 - op: add
   path: /spec/template/spec/containers/0/args
-  value: ["-config.file=/etc/otel-tempo-config.yaml"]
+  value: ["--config.file=/etc/prometheus/otel-prometheus-config.yaml",
+      "--enable-feature=exemplar-storage",
+      "--web.enable-remote-write-receiver"]
 - op: add
   path: /spec/template/spec/containers/0/imagePullPolicy
   value: "Always"
 - op: add
   path: /spec/template/spec/volumes
   value: 
-    - name: otel-tempo-config-vol
+    - name: otel-prometheus-config-vol
       configMap:
-        name: otel-tempo-config
+        name: otel-prometheus-config
         items:
-        - key: otel-tempo-config.yaml
-          path: otel-tempo-config.yaml
+        - key: otel-prometheus-config.yaml
+          path: otel-prometheus-config.yaml
 - op: add
   path: /spec/template/spec/containers/0/volumeMounts
   value:
-    - name: otel-tempo-config-vol
-      mountPath: /etc
+    - name: otel-prometheus-config-vol
+      mountPath: /etc/prometheus
 - op: remove
   path: /spec/template/spec/securityContext
 - op: remove
