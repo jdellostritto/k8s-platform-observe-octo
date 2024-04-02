@@ -11,7 +11,7 @@
       containerPort: 8889
 - op: add
   path: /spec/template/spec/containers/0/args
-  value: ["/otelcol", "--config=/etc/otelcol-contrib/otel-collector-config.yaml"]
+  value: ["--config=/etc/otelcol-contrib/otel-collector-config.yaml"]
 - op: add
   path: /spec/template/spec/containers/0/imagePullPolicy
   value: "Always"
