@@ -1,0 +1,37 @@
+---
+- op: replace
+  path: /spec/template/spec/containers/0/name
+  value: base-collector
+- op: add
+  path: /spec/template/spec/containers/0/ports
+  value:
+    - name: grpc # OTLP gRPC receiver
+      containerPort: 4327
+    - name: prom # Prometheus exporter metrics
+      containerPort: 8889
+- op: add
+  path: /spec/template/spec/containers/0/args
+  value: ["/otelcol", "--config=/etc/otelcol-contrib/otel-collector-config.yaml"]
+- op: add
+  path: /spec/template/spec/containers/0/imagePullPolicy
+  value: "Always"
+- op: add
+  path: /spec/template/spec/volumes
+  value: 
+    - name: otel-collector-config-vol
+      configMap:
+        name: otel-collector-config
+        items:
+        - key: otel-collector-config.yaml
+          path: otel-collector-config.yaml
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts
+  value:
+    - name: otel-collector-config-vol
+      mountPath: /etc/otelcol-contrib
+- op: remove
+  path: /spec/template/spec/securityContext
+- op: remove
+  path: /spec/template/spec/automountServiceAccountToken
+- op: remove
+  path: /spec/template/spec/containers/0/securityContext

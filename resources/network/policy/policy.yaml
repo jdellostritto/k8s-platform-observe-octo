@@ -1,0 +1,19 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: access-shared
+spec:
+  podSelector:
+    matchLabels:
+      secure: flip-platform-keycloak
+  ingress:
+  - from:
+    # we allow all access from keycloak to keycloak
+    - podSelector:
+        matchLabels:
+          secure: flip-platform-keycloak
+  - from: []
+    ports:
+    - protocol: TCP
+      port: 8080

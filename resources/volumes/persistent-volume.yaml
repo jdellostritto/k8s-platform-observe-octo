@@ -1,0 +1,22 @@
+# Kind for volume chain
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  # Name the persistent chain
+  name: base
+  # Labels for identifying PV
+  labels:
+    type: local
+    app: base
+spec:
+  storageClassName: "standard"
+  capacity:
+    # PV Storage capacity
+    storage: 8Gi
+  # A db can write and read from volumes to multiple pods
+  accessModes:
+    - ReadWriteMany
+  # Specify the path to persistent the volumes  
+  hostPath:
+    path: "/mnt/data"
+  persistentVolumeReclaimPolicy: Recycle

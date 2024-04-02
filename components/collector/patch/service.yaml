@@ -1,0 +1,13 @@
+---
+- op: replace
+  path: /spec/ports
+  value:
+    - name: grpc
+      port: 4317
+      targetPort: 4317
+    - name: prom
+      port: 8889
+      targetPort: 8889
+- op: add
+  path: /spec/type
+  value: LoadBalancer

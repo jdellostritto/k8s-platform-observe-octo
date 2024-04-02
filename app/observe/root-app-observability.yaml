@@ -1,0 +1,21 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app-observability
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: observe
+    name: in-cluster
+  project: root-project-observability
+  source:
+    path: app/observe/app-bundle
+    repoURL: https://github.com/jdellostritto/k8s-platform-musical-waffle
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true

@@ -1,0 +1,18 @@
+# define a resource for volume chain
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  # Name the volume chain
+  name: base
+  labels:
+    app: base
+spec:
+  storageClassName: "standard"
+  accessModes:
+    # Allow ReadWrite to multiple pods
+    - ReadWriteMany
+  # PVC requesting resources
+  resources:
+    requests:
+      # the PVC storage
+      storage: 8Gi

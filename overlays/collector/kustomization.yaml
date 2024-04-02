@@ -1,0 +1,46 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# Our base Manifests
+resources:
+- ../../resources/workload/deployment
+- ../../resources/network/service
+
+# These components are for the Deploymnent and Service neither changes per environment.
+# Components are shared across each environment. There are no patches for the service and deployment here.
+# Because the are the saem for evey environemnt each env will pull the patch from the components (DRY) 
+components:
+  - ../../components/collector
+
+# The name suffix will be appended the name of the resources (bases). 
+# In this example case our resource names are simply called `base`. 
+# So our service and deployment names will end up being:
+#  - 'base' + '-guest-book'
+# This file as well as the ingress file will need to be aware of this name.
+nameSuffix: -collector
+
+images:
+- name: UNDEFINED
+  newName: otel/opentelemetry-collector-contrib
+  newTag: "0.91.0"
+
+# Annotation Transformer - used to determine where to put annotations
+transformers:
+- ./transformers.yaml
+
+# The common label used for labels and Selectors.
+commonLabels:
+  app.kubernetes.io/name: base-postgres
+
+replicas:
+- name: base-collector
+  count: 1 
+
+configMapGenerator:
+  - name: otel-collector-config
+    options:
+      disableNameSuffixHash: true
+      labels:
+        app: baser-collector
+    files:
+      - otel-collector-config.yaml=otel-collector-config.yaml
+    
