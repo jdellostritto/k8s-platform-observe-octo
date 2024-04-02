@@ -9,19 +9,19 @@ resources:
 # Components are shared across each environment. There are no patches for the service and deployment here.
 # Because the are the saem for evey environemnt each env will pull the patch from the components (DRY) 
 components:
-  - ../../components/collector
+  - ../../components/tempo
 
 # The name suffix will be appended the name of the resources (bases). 
 # In this example case our resource names are simply called `base`. 
 # So our service and deployment names will end up being:
 #  - 'base' + '-guest-book'
 # This file as well as the ingress file will need to be aware of this name.
-nameSuffix: -collector
+nameSuffix: -tempo
 
 images:
 - name: UNDEFINED
-  newName: otel/opentelemetry-collector-contrib
-  newTag: "0.91.0"
+  newName: grafana/tempo
+  newTag: "latest"
 
 # Annotation Transformer - used to determine where to put annotations
 transformers:
@@ -29,18 +29,18 @@ transformers:
 
 # The common label used for labels and Selectors.
 commonLabels:
-  app.kubernetes.io/name: base-collector
+  app.kubernetes.io/name: base-tempo
 
 replicas:
-- name: base-collector
+- name: base-tempo
   count: 1 
 
 configMapGenerator:
-  - name: otel-collector-config
+  - name: otel-tempo-config
     options:
       disableNameSuffixHash: true
       labels:
-        app: base-collector
+        app: base-tempo
     files:
-      - otel-collector-config.yaml=otel-collector-config.yaml
+      - otel-tempo-config.yaml=otel-tempo-config.yaml
     

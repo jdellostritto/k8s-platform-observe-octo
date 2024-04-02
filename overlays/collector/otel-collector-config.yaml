@@ -12,28 +12,28 @@ processors:
 
 exporters:
   prometheusremotewrite:
-    endpoint: "http://prometheus:9090/api/v1/write"
+    endpoint: "http://base-prometheus:9090/api/v1/write"
 
   prometheus:
     endpoint: "0.0.0.0:8889"
     enable_open_metrics: true
 
   otlp/jaeger:
-    endpoint: "http://jaeger:4317"
+    endpoint: "http://base-jaeger:4317"
     tls:
       insecure: true
 
   zipkin:
-    endpoint: http://zipkin:9411/api/v2/spans
+    endpoint: http://base-zipkin:9411/api/v2/spans
     format: proto
 
   otlp/tempo:
-    endpoint: "http://tempo:4317"
+    endpoint: "http://base-tempo:4317"
     tls:
       insecure: true
 
   loki:
-    endpoint: "http://loki:3100/loki/api/v1/push"
+    endpoint: "http://base-loki:3100/loki/api/v1/push"
 
 service:
   pipelines:
