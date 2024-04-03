@@ -8,6 +8,6 @@
     - name: grafana
       port: 3200
       targetPort: 3200
-- op: add
-  path: /spec/type
-  value: LoadBalancer
+#- op: add
+#  path: /spec/type
+#  value: LoadBalancer
