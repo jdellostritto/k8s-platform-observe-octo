@@ -32,11 +32,11 @@
       mountPath: /etc
     - name: tmp-tempo
       mountPath: /tmp/tempo
-- op: remove
-  path: /spec/template/spec/securityContext
-- op: remove
-  path: /spec/template/spec/automountServiceAccountToken
-- op: remove
-  path: /spec/template/spec/containers/0/securityContext
+#- op: remove
+#  path: /spec/template/spec/securityContext
+#- op: remove
+#  path: /spec/template/spec/automountServiceAccountToken
+#- op: remove
+#  path: /spec/template/spec/containers/0/securityContext
 - op: remove
   path: /spec/template/spec/containers/0/resources
