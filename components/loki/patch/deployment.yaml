@@ -1,0 +1,23 @@
+---
+- op: replace
+  path: /spec/template/spec/containers/0/name
+  value: base-loki
+- op: add
+  path: /spec/template/spec/containers/0/args
+  value: ["-config.file=/etc/loki/local-config.yaml"]
+- op: add
+  path: /spec/template/spec/containers/0/ports
+  value:
+    - name: http 
+      containerPort: 3100 
+- op: add
+  path: /spec/template/spec/containers/0/imagePullPolicy
+  value: "Always"
+- op: remove
+  path: /spec/template/spec/securityContext
+- op: remove
+  path: /spec/template/spec/automountServiceAccountToken
+- op: remove
+  path: /spec/template/spec/containers/0/securityContext
+- op: remove
+  path: /spec/template/spec/containers/0/resources

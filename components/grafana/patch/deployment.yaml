@@ -1,0 +1,34 @@
+---
+- op: replace
+  path: /spec/template/spec/containers/0/name
+  value: base-grafana
+- op: add
+  path: /spec/template/spec/containers/0/ports
+  value:
+    - name: http       
+      containerPort: 3000
+- op: add
+  path: /spec/template/spec/containers/0/imagePullPolicy
+  value: "Always"
+- op: add
+  path: /spec/template/spec/volumes
+  value: 
+    - name: otel-grafana-config-vol
+      configMap:
+        name: otel-grafana-config
+        items:
+        - key: otel-grafana-config.yaml
+          path: otel-grafana-config.yaml
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts
+  value:
+    - name: otel-grafana-config-vol
+      mountPath: /etc/grafana/provisioning/datasources 
+- op: remove
+  path: /spec/template/spec/securityContext
+- op: remove
+  path: /spec/template/spec/automountServiceAccountToken
+- op: remove
+  path: /spec/template/spec/containers/0/securityContext
+- op: remove
+  path: /spec/template/spec/containers/0/resources

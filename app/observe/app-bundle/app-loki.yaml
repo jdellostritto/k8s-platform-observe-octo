@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-loki-observability
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: observe
+    name: in-cluster
+  project: root-project-observability
+  source:
+    path: overlays/loki
+    repoURL: https://github.com/jdellostritto/k8s-platform-observe-octo
+    targetRevision: HEAD
+    
