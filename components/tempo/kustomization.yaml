@@ -10,3 +10,7 @@ patches:
   target:
     kind: Service
     name: base
+- path: ./patch/persistentVolume.yaml
+  target:
+    kind: PersistentVolume
+    name: base
