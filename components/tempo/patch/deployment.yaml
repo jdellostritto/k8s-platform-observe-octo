@@ -24,11 +24,13 @@
         items:
         - key: otel-tempo-config.yaml
           path: otel-tempo-config.yaml
+    - name: tmp-tempo
+
 - op: add
   path: /spec/template/spec/containers/0/volumeMounts
   value:
-    - name: otel-tempo-config-vol
-      mountPath: /etc
+    - name: tmp-tempo
+      mountPath: /tmp/tempo
 - op: remove
   path: /spec/template/spec/securityContext
 - op: remove

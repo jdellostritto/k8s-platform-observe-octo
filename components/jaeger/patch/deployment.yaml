@@ -1,0 +1,22 @@
+---
+- op: replace
+  path: /spec/template/spec/containers/0/name
+  value: base-jaeger
+- op: add
+  path: /spec/template/spec/containers/0/ports
+  value:
+    - name: grpc 
+      containerPort: 4317
+    - name: other
+      containerPort: 16686 
+- op: add
+  path: /spec/template/spec/containers/0/imagePullPolicy
+  value: "Always"
+- op: remove
+  path: /spec/template/spec/securityContext
+- op: remove
+  path: /spec/template/spec/automountServiceAccountToken
+- op: remove
+  path: /spec/template/spec/containers/0/securityContext
+- op: remove
+  path: /spec/template/spec/containers/0/resources
