@@ -32,14 +32,13 @@
   value:
     - name: otel-tempo-config-vol
       mountPath: /etc
-    - name: base-tempo
+    - name: tmp-folder
       mountPath: /tmp/tempo
-    
-#- op: remove
-#  path: /spec/template/spec/securityContext
-#- op: remove
-#  path: /spec/template/spec/automountServiceAccountToken
-#- op: remove
-#  path: /spec/template/spec/containers/0/securityContext
+- op: remove
+  path: /spec/template/spec/securityContext
+- op: remove
+  path: /spec/template/spec/automountServiceAccountToken
+- op: remove
+  path: /spec/template/spec/containers/0/securityContext
 - op: remove
   path: /spec/template/spec/containers/0/resources
