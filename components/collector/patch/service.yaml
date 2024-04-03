@@ -8,6 +8,6 @@
     - name: prom
       port: 8889
       targetPort: 8889
-- op: add
-  path: /spec/type
-  value: LoadBalancer
+#- op: add
+#  path: /spec/type
+#  value: LoadBalancer

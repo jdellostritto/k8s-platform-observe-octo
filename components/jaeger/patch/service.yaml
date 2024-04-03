@@ -5,6 +5,6 @@
     - name: http
       port: 9090
       targetPort: 9090
-- op: add
-  path: /spec/type
-  value: LoadBalancer
+#- op: add
+#  path: /spec/type
+#  value: LoadBalancer
