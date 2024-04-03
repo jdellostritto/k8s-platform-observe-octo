@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - ../../resources/workload/deployment
 - ../../resources/network/service
-- ../../resources/network/volumes
+- ../../resources/volumes
 
 # These components are for the Deploymnent and Service neither changes per environment.
 # Components are shared across each environment. There are no patches for the service and deployment here.
