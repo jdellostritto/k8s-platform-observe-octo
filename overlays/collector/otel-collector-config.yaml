@@ -28,7 +28,7 @@ exporters:
     format: proto
 
   otlp/tempo:
-    endpoint: "http://base-tempo:4317"
+    endpoint: "http://tempo:4317"
     tls:
       insecure: true
 
